@@ -27,10 +27,10 @@ TBD
     $ npm install
   ```
 
-2. Run the server
+2. Run the development server
 
   ```bash
-    $ npm run start
+    $ npm run dev
   ```
 
 ## Build a new Docker Image
