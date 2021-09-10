@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+// tslint:disable-next-line:no-console
 const { MONGO_URI } = process.env;
-
 const databaseConnect = () => {
   // Connecting to the database
   mongoose
