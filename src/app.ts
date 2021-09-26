@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { auth } from './middlewares/auth';
+import cors from 'cors';
+
 
 dotenv.config();
 
@@ -13,19 +15,21 @@ const app = express();
 databaseConnect();
 
 app.use(express.json());
+app.use(cors());
 
 app.post("/register", async (req, res) => {
     try{
         const { username, email, password } = req.body;
         console.log(req.body)
         if (!(email && password && username)) {
-            res.status(400).send("All input is required");
+          res.status(400).send("All input is required");
+          return;
         }
 
         const oldUser = await UserModel.findOne({ email });
 
         if (oldUser) {
-        return res.status(409).send("User Already Exist. Please Login");
+          return res.status(409).send("User Already Exist. Please Login");
         }
 
         const encryptedPassword = await bcrypt.hash(password, 10);
@@ -58,9 +62,10 @@ app.post("/login", async (req, res) => {
 
   try {
     const { username, password } = req.body;
-
+    console.log(req.body);
     if (!(username && password)) {
       res.status(400).send("All input is required");
+      return;
     }
     const user = await UserModel.findOne({ username });
 

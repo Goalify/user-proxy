@@ -39,7 +39,7 @@ TBD
 
 ## Testing
 
-TBD
+https://app.getpostman.com/join-team?invite_code=4e610c59564699b12199f87aedf265b8&ws=845c4d8d-958d-433a-89f7-2e3d23c6d385
 
 ### Docker-Compose
 
