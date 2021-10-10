@@ -62,7 +62,7 @@ app.post("/login", async (req, res) => {
 
   try {
     const { username, password } = req.body;
-    console.log(req.body);
+    
     if (!(username && password)) {
       res.status(400).send("All input is required");
       return;
@@ -81,12 +81,46 @@ app.post("/login", async (req, res) => {
       user.token = token;
 
       res.status(200).json(user);
+      return;
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {
     console.log(err);
   }
 });
+
+app.get("/goals", auth, async (req, res) => {
+  try {
+    const username = req.query.username as string;
+    if(!username){
+      res.status(400).send("Username missing");
+      return;
+    }
+    
+    const user = await UserModel.findOne({ username })
+    if (user) {
+      res.status(200).json({
+        list: [{
+            id: "1",
+            state: "InProgress",
+            name: "Presentation",
+            description: "this is the description",
+            milestones: [{id: "1", state: true, name: "milestone1"}, {id: "2", state: false, name: "milestone2"},
+            {id: "3", state: false, name: "milestone3"}],
+            published: true,
+            deadline: "12/Sep",
+            dateCreated: "10/9/2021",
+            dateFinished: null
+        }]
+      });
+      return;
+    }
+    res.status(400).send("invalid token");
+  } catch(err){
+    console.log(err);
+  }
+});
+
 
 app.post("/test", auth, (req, res) => {
     res.status(200).send('test passed');
