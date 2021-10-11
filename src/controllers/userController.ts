@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken';
 export const register = async (req: express.Request, res: express.Response) => {
     try{
         const { username, email, password } = req.body;
-        console.log(req.body)
         if (!(email && password && username)) {
           res.status(400).send("All input is required");
           return;
@@ -35,7 +34,8 @@ export const register = async (req: express.Request, res: express.Response) => {
         newUser.token = token;
         res.status(200).json(newUser);
     }
-    catch(e){
+    catch (e) {
+        // tslint:disable-next-line:no-console
         console.log(e);
     }
 }
@@ -43,7 +43,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 export const login = async (req: express.Request, res: express.Response) => {
   try {
     const { username, password } = req.body;
-    
+
     if (!(username && password)) {
       res.status(400).send("All input is required");
       return;
@@ -66,6 +66,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {
+    // tslint:disable-next-line:no-console
     console.log(err);
   }
 }

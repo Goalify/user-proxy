@@ -3,11 +3,12 @@ import jwt from 'jsonwebtoken';
 import * as express from 'express';
 import dotenv from 'dotenv';
 import { User } from '../types/userTypes';
+import fetch from 'node-fetch';
 
 dotenv.config();
 const config = process.env;
 
-export const get_goals = async (req: express.Request, res: express.Response) => {
+export const getGoals = async (req: express.Request, res: express.Response) => {
   try {
     const token = req.query.token as string;
     const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
@@ -26,16 +27,17 @@ export const get_goals = async (req: express.Request, res: express.Response) => 
         .then(response => response.json())
         .then((data) => res.status(200).json(data));
     res.status(400).send("invalid token");
-  } catch(err){
+  } catch (err) {
+    // tslint:disable-next-line:no-console
     console.log(err);
   }
 }
 
-export const add_goal = async (req: express.Request, res: express.Response) => {
+export const addGoal = async (req: express.Request, res: express.Response) => {
     try {
         const { token, goal } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -52,15 +54,16 @@ export const add_goal = async (req: express.Request, res: express.Response) => {
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };
 
-export const add_milestone = async (req: express.Request, res: express.Response) => {
+export const addMilestone = async (req: express.Request, res: express.Response) => {
     try {
         const { token, milestone } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -77,15 +80,16 @@ export const add_milestone = async (req: express.Request, res: express.Response)
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };
 
-export const remove_goal = async (req: express.Request, res: express.Response) => {
+export const removeGoal = async (req: express.Request, res: express.Response) => {
     try {
         const { token, goalId } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -102,15 +106,16 @@ export const remove_goal = async (req: express.Request, res: express.Response) =
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };
 
-export const remove_milestone = async (req: express.Request, res: express.Response) => {
+export const removeMilestone = async (req: express.Request, res: express.Response) => {
     try {
         const { token, milestoneId } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -127,15 +132,16 @@ export const remove_milestone = async (req: express.Request, res: express.Respon
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };
 
-export const edit_goal = async (req: express.Request, res: express.Response) => {
+export const editGoal = async (req: express.Request, res: express.Response) => {
     try {
         const { token, goalId, goal } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -153,15 +159,16 @@ export const edit_goal = async (req: express.Request, res: express.Response) => 
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };
 
-export const edit_milestone = async (req: express.Request, res: express.Response) => {
+export const editMilestone = async (req: express.Request, res: express.Response) => {
     try {
         const { token, milestoneId, milestone } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -179,6 +186,7 @@ export const edit_milestone = async (req: express.Request, res: express.Response
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };
@@ -187,7 +195,7 @@ export const discover = async (req: express.Request, res: express.Response) => {
     try {
         const { token, numRows } = req.body;
         const decoded = jwt.verify(token, config.TOKEN_KEY) as User;
-    
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -204,6 +212,7 @@ export const discover = async (req: express.Request, res: express.Response) => {
             .then((data) => res.status(200).json(data));
         res.status(400).send("invalid token");
     } catch (err) {
+        // tslint:disable-next-line:no-console
         console.log(err);
     }
 };

@@ -20,13 +20,13 @@ app.use(cors());
 app.post("/register", userController.register);
 app.post("/login", userController.login);
 
-app.get("/get-goals", auth, goalsController.get_goals);
-app.post("/add-goal", auth, goalsController.add_goal);
-app.post("/add-milestone", auth, goalsController.add_milestone);
-app.post("/remove-goal", auth, goalsController.remove_goal);
-app.post("/remove-milestone", auth, goalsController.remove_milestone);
-app.post("/edit-goal", auth, goalsController.edit_goal);
-app.post("/edit_milstone", auth, goalsController.edit_milestone);
+app.get("/get-goals", auth, goalsController.getGoals);
+app.post("/add-goal", auth, goalsController.addGoal);
+app.post("/add-milestone", auth, goalsController.addMilestone);
+app.post("/remove-goal", auth, goalsController.removeGoal);
+app.post("/remove-milestone", auth, goalsController.removeMilestone);
+app.post("/edit-goal", auth, goalsController.editGoal);
+app.post("/edit_milstone", auth, goalsController.editMilestone);
 app.post("/discover", auth, goalsController.discover);
 
 app.post("/test", auth, (req, res) => {

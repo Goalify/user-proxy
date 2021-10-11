@@ -10,7 +10,7 @@ describe('userController', () => {
     describe('register', () => {
         jest.spyOn(UserModel, 'findOne')
             .mockReturnValue(Promise.resolve(null as User));
-        
+
         jest.spyOn(UserModel, 'create')
             .mockImplementationOnce(() => Promise.resolve({
                 _id: 'some-id',
@@ -40,7 +40,7 @@ describe('userController', () => {
                     })
                 })
         })
-        
+
     })
 })
 
